@@ -1,7 +1,9 @@
-Robot = require '../robot'
-Xmpp  = require 'node-xmpp'
+Robot   = require('hubot').robot()
+Adapter = require('hubot').adapter()
 
-class XmppBot extends Robot.Adapter
+Xmpp    = require 'node-xmpp'
+
+class XmppBot extends Adapter
   run: ->
     options =
       username: process.env.HUBOT_XMPP_USERNAME
@@ -180,5 +182,6 @@ class XmppBot extends Robot.Adapter
 
     @client.send message
 
-module.exports = XmppBot
+exports.use = (robot) ->
+  new XmppBot robot
 
